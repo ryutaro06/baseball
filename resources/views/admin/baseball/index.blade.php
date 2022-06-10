@@ -25,41 +25,38 @@
                 </form>
             </div>
         </div>
-        <div class="row">
-            <div class="list-news col-md-12 mx-auto">
-                <div class="row">
-                    <table class="table table-dark">
-                        <thead>
-                            <tr>
-                                <th width="10%">ID</th>
-                                <th width="20%">タイトル</th>
-                                <th width="30%">本文</th>
-                                <th width="20%">名前</th>
-                                <th width="10%">操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($posts as $topic)
-                                <tr>
-                                    <th>{{ $topic->id }}</th>
-                                    <td>{{ \Str::limit($topic->title, 100) }}</td>
-                                    <td>{{ \Str::limit($topic->body, 150) }}</td>
-                                    <td>{{ \Str::limit($topic->user_id, 100) }}</td>
-                                    <td>
-                                        <div>
-                                            <a href="{{ action('Admin\NewsController@edit', ['id' => $topic->id]) }}">編集</a>
-                                        </div>
-                                        <div>
-                                            <a href="{{ action('Admin\NewsController@delete', ['id' => $topic->id]) }}">削除</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+        
+        @foreach($posts as $topic)
+            <div class="card main-content">
+                <img src="{{ secure_asset('/storage/image/'. $topic->image_path) }}" class="card-img-top img_size" alt="{{$topic->image_path}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ \Str::limit($topic->title, 100) }}</h5>
+                    <p class="card-text">{{ \Str::limit($topic->body, 150) }}</p>
+                    <!--Commentの実装-->
+                    <p class="card-text">{{ \Str::limit($comment->comment, 150) }}</p>
+                    <form action="{{ action('Admin\CommentController@comment_create') }}" method="post" enctype="multipart/form-data">
+                        <div class="form-group row">
+                            <label class="col-md-2" for="comment">コメント</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" name="commnet">
+                            </div>
+                        </div>
+                        @csrf
+                        <input type="submit" class="btn btn-primary" value="送信">
+                    </form>
+
+                    
+                    <div class="row">
+                        <div class="col-1">
+                            <a href="{{ action('Admin\NewsController@edit', ['id' => $topic->id]) }}">編集</a>
+                        </div>
+                        <div class="col-1">
+                            <a href="{{ action('Admin\NewsController@delete', ['id' => $topic->id]) }}">削除</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
     
     

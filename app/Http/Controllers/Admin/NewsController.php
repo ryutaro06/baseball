@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 
 // 以下を追記することでTopic Modelが扱えるようになる
 use App\Topic;
+use App\History;
 
+use Carbon\Carbon;
 use Auth;
 
 class NewsController extends Controller
@@ -46,7 +48,7 @@ class NewsController extends Controller
         $topic->save();
         
         // admmin/baseball/createにリダイレクトする
-        return redirect('admin/baseball/create');
+        return redirect('admin/baseball/index');
     }
     
     public function index(Request $request)
@@ -97,6 +99,12 @@ class NewsController extends Controller
         // 該当するデータを上書きして保存する
         $topic->fill($topic_form);
         $topic->save();
+        
+        $history = new History();
+        $history->topic_id = $topic->id;
+        $history->edited_at = Carbon::now();
+        $history->save();
+        
         return redirect('admin/baseball');
     }
     
