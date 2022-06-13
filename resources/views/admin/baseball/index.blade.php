@@ -33,8 +33,11 @@
                     <h5 class="card-title">{{ \Str::limit($topic->title, 100) }}</h5>
                     <p class="card-text">{{ \Str::limit($topic->body, 150) }}</p>
                     <!--Commentの実装-->
-                    <p class="card-text">{{ \Str::limit($comment->comment, 150) }}</p>
+                    @foreach($topic->comments as $comment)
+                        <p class="card-text">{{ \Str::limit($comment->comment, 150) }}</p>
+                    @endforeach
                     <form action="{{ action('Admin\CommentController@comment_create') }}" method="post" enctype="multipart/form-data">
+                    
                         <div class="form-group row">
                             <label class="col-md-2" for="comment">コメント</label>
                             <div class="col-md-10">
@@ -42,6 +45,7 @@
                             </div>
                         </div>
                         @csrf
+                        <input type="hidden" name="topic_id" value="{{$topic->id}}">
                         <input type="submit" class="btn btn-primary" value="送信">
                     </form>
 

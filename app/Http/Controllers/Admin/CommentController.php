@@ -23,20 +23,20 @@ class CommentController extends Controller
         $this->validate($request, Comment::$rules);
         
         // Topic Modelからデータを取得する
-        $topic = Topic::find($request->id);
+        // $topic = Topic::find($request->id);
         
         $comment = new Comment();
         $form = $request->all();
         
         $comment->fill($form);
-        $comment->topic_id = $topic->id;
+        // $comment->topic_id = $topic->id;
         
         // フォームから送信されてきた_tokenを削除する
         unset($form['_token']);
         
         $comment->save();
         
-        return redirect('admin/baseball/index');
+        return redirect('admin/baseball');
         
     }
 }

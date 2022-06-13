@@ -24,7 +24,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('baseball/delete', 'Admin\NewsController@delete')->middleware('auth');
     
     Route::get('baseball/index', 'Admin\CommentController@comment_add')->middleware('auth');
-    Route::post('baseball/indx', 'Admin\CommentController@comment_create')->middleware('auth');
+    Route::post('baseball/index', 'Admin\CommentController@comment_create')->middleware('auth');
 });
 
 
