@@ -11,6 +11,6 @@ class Comment extends Model
     
     public static $rules = array(
         'topic_id' => 'required',
-        // 'comment' => 'required',
+        'comment' => 'required',
         );
 }

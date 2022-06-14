@@ -30,6 +30,7 @@ class CommentController extends Controller
         
         $comment->fill($form);
         // $comment->topic_id = $topic->id;
+
         
         // フォームから送信されてきた_tokenを削除する
         unset($form['_token']);

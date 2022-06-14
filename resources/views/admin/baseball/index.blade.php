@@ -41,7 +41,7 @@
                         <div class="form-group row">
                             <label class="col-md-2" for="comment">コメント</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control" name="commnet">
+                                <input type="text" class="form-control" name="comment">
                             </div>
                         </div>
                         @csrf
