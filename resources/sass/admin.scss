@@ -34,18 +34,51 @@ body {
 }
 
 .login-header {
-  background-color: rgba(0, 0, 0, 0.25)
+  margin-top: 10px;
 }
 
 .login-body {
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .main-content {
   margin-bottom: 20px;
 }
 
+
+
 .img_size {
-  max-width: 800px;
+  width: 90%;
+  margin: 0 auto;
+}
+.card-body {
+  width: 90%;
+  margin: 10px auto;
+  padding: 0;
+}
+
+.card-article {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.card-comment {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
   
+}
+.card-comment .card-text {
+  boreder-bottom: 1px solid #ddd;
+}
+
+.comment-text {
+  vertical-align: middle;
+}
+
+.grid {
+  display: grid;
 }

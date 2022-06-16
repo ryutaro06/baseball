@@ -30,32 +30,35 @@
             <div class="card main-content">
                 <img src="{{ secure_asset('/storage/image/'. $topic->image_path) }}" class="card-img-top img_size" alt="{{$topic->image_path}}">
                 <div class="card-body">
-                    <h5 class="card-title">{{ \Str::limit($topic->title, 100) }}</h5>
-                    <p class="card-text">{{ \Str::limit($topic->body, 150) }}</p>
+                    <div class="card-article">
+                        <h3 class="card-title">{{ \Str::limit($topic->title, 100) }}</h3>
+                        <p class="card-text">{{ \Str::limit($topic->body, 500) }}</p>
+                    </div>
                     <!--Commentの実装-->
-                    @foreach($topic->comments as $comment)
-                        <p class="card-text">{{ \Str::limit($comment->comment, 150) }}</p>
-                    @endforeach
+                    <div class="card-comment">
+                        @foreach($topic->comments as $comment)
+                            <p class="card-text">{{ \Str::limit($comment->comment, 150) }}</p>
+                        @endforeach
+                    </div>
                     <form action="{{ action('Admin\CommentController@comment_create') }}" method="post" enctype="multipart/form-data">
-                    
                         <div class="form-group row">
-                            <label class="col-md-2" for="comment">コメント</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" name="comment">
+                            <label class="col-md-1" for="comment"></label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control comment-text" name="comment" placeholder="コメントの投稿">
+                            </div>
+                            @csrf
+                            <input type="hidden" name="topic_id" value="{{$topic->id}}">
+                            <input type="submit" class="btn btn-primary col-md-1" value="送信">
+                            <div class="col-md-1 grid">
+                                <a href="{{ action('Admin\NewsController@edit', ['id' => $topic->id]) }}">編集</a>
+                                <a href="{{ action('Admin\NewsController@delete', ['id' => $topic->id]) }}">削除</a>
                             </div>
                         </div>
-                        @csrf
-                        <input type="hidden" name="topic_id" value="{{$topic->id}}">
-                        <input type="submit" class="btn btn-primary" value="送信">
                     </form>
 
                     
                     <div class="row">
-                        <div class="col-1">
-                            <a href="{{ action('Admin\NewsController@edit', ['id' => $topic->id]) }}">編集</a>
-                        </div>
-                        <div class="col-1">
-                            <a href="{{ action('Admin\NewsController@delete', ['id' => $topic->id]) }}">削除</a>
+                        <div class="col-md-1">
                         </div>
                     </div>
                 </div>

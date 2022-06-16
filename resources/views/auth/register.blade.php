@@ -26,6 +26,33 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="favorite_team" class="col-md-4 col-form-label text-md-right">{{ __('Favorite_team') }}</label>
+
+                            <div class="col-md-8">
+                                <select name="favorite_team" class="col-form-label @error('favorite_team') is-invalid @enderror">
+                                    <option value="">選択してください</option>
+                                    <option value="giants">巨人</option>
+                                    <option value="tigers">阪神</option>
+                                    <option value="carp">広島</option>
+                                    <option value="dragons">中日</option>
+                                    <option value="baystars">DeNA</option>
+                                    <option value="swallows">ヤクルト</option>
+                                    <option value="hawks">ソフトバンク</option>
+                                    <option value="buffaloes">オリックス</option>
+                                    <option value="fighters">日本ハム</option>
+                                    <option value="lions">西武</option>
+                                    <option value="marines">ロッテ</option>
+                                    <option value="eagles">楽天</option>
+                                </select>
+                                @error('favorite_team')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
@@ -42,7 +69,7 @@
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
