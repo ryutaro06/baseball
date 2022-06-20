@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use App\Topic;
 use App\Comment;
+use App\CommentHistory;
+use Carbon\Carbon;
+use Auth;
 
 class CommentController extends Controller
 {
@@ -22,20 +25,20 @@ class CommentController extends Controller
         // Varidationを行う
         $this->validate($request, Comment::$rules);
         
-        // Topic Modelからデータを取得する
-        // $topic = Topic::find($request->id);
-        
         $comment = new Comment();
         $form = $request->all();
         
         $comment->fill($form);
-        // $comment->topic_id = $topic->id;
-
-        
         // フォームから送信されてきた_tokenを削除する
         unset($form['_token']);
         
+        $comment->user_id = Auth::id();
         $comment->save();
+        
+        $commenthistory = new CommentHistory();
+        $commenthistory->comment_id = $comment->id;
+        $commenthistory->edited_at = Carbon::now();
+        $commenthistory->save();
         
         return redirect('admin/baseball');
         

@@ -38,6 +38,11 @@
                     <div class="card-comment">
                         @foreach($topic->comments as $comment)
                             <p class="card-text">{{ \Str::limit($comment->comment, 150) }}</p>
+                            @if ($comment->comment_histories != NULL)
+                                @foreach ($comment->comment_histories as $commenthistory)
+                                    <p>{{ $commenthistory->edited_at }}</p>
+                                @endforeach
+                            @endif
                         @endforeach
                     </div>
                     <form action="{{ action('Admin\CommentController@comment_create') }}" method="post" enctype="multipart/form-data">
