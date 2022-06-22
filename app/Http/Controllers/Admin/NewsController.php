@@ -47,8 +47,7 @@ class NewsController extends Controller
         $topic->user_id = Auth::id();
         $topic->save();
         
-        // admmin/baseball/createにリダイレクトする
-        return redirect('admin/baseball/index');
+        return redirect('admin/baseball');
     }
     
     public function index(Request $request)
@@ -64,7 +63,6 @@ class NewsController extends Controller
         
         return view('admin.baseball.index', ['posts' => $posts, 'cond_title' => $cond_title]);
     }
-    
     public function edit(Request $request)
     {
         $topic = Topic::find($request->id);

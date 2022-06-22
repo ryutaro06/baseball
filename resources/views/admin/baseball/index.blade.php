@@ -37,12 +37,11 @@
                     <!--Commentの実装-->
                     <div class="card-comment">
                         @foreach($topic->comments as $comment)
-                            <p class="card-text">{{ \Str::limit($comment->comment, 150) }}</p>
-                            @if ($comment->comment_histories != NULL)
-                                @foreach ($comment->comment_histories as $commenthistory)
-                                    <p>{{ $commenthistory->edited_at }}</p>
-                                @endforeach
-                            @endif
+                            <div class="row">
+                                <p class="card-text col-8">{{ \Str::limit($comment->comment, 50) }}</p>
+                                <p class="card-text col-3">{{ $comment->edited_at }}</p>
+                                <p class="card-text col-1">{{ $comment->user_name }}</p>
+                            </div>
                         @endforeach
                     </div>
                     <form action="{{ action('Admin\CommentController@comment_create') }}" method="post" enctype="multipart/form-data">
