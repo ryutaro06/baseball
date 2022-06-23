@@ -16,7 +16,4 @@ class Comment extends Model
         'user_name' => 'required',
         );
     
-
-        
-        
 }

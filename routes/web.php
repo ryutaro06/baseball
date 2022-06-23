@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +26,8 @@ Route::group(['prefix' => 'admin'], function(){
     
     Route::get('baseball/index', 'Admin\CommentController@comment_add')->middleware('auth');
     Route::post('baseball/index', 'Admin\CommentController@comment_create')->middleware('auth');
+
+    Route::get('baseball/users/{id}', 'UserController@getEdit');
 });
 
 
