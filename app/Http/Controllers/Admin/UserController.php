@@ -13,16 +13,20 @@ class UserController extends Controller
     {
         $user = User::find($request->id);
         
-        return view('admin.baseball.users', ['user' => $user]);
+        return view('admin.baseball.users', compact('user'));
     }
     
     public function postUserEdit(Request $request)
     {
+        
         $user = User::find($request->id);
         $user_form = $request->all();
         $user->fill($user_form);
         $user->save();
-        
+        // echo $user;
+        // exit;
+      
+        // return view('admin.baseball.users', ['user' => $user]);  
         return redirect('admin/baseball');
     }
 }

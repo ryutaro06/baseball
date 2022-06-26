@@ -26,6 +26,8 @@
             </div>
         </div>
         
+        
+        
         @foreach($posts as $topic)
             <div class="card main-content">
                 <img src="{{ secure_asset('/storage/image/'. $topic->image_path) }}" class="card-img-top img_size" alt="{{$topic->image_path}}">

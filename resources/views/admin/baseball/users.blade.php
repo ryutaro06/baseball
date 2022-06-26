@@ -26,7 +26,7 @@
                         <div>
                             <p>好きな球団：
                                 <select name="favorite_team" class="@error('favorite_team') is-invalid @enderror">
-                                    <option value="{{ $user->favorite_team }}">{{ $user->favorite_team }}</option>
+                                    <option value="{{ $user->favorite_team }}">変更がある場合は選択してください</option>
                                     <option value="giants">巨人</option>
                                     <option value="tigers">阪神</option>
                                     <option value="carp">広島</option>
@@ -57,6 +57,7 @@
                                     </span>
                             @enderror
                         </div>
+                        
                         <input type="submit" value="更新">
                     </form>
                     <!-- 重要な箇所ここまで -->
