@@ -4,28 +4,25 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\UserEdited;
+use App\User;
 
 class UserController extends Controller
 {
     //
-    
-    protected $user;
-    
-    /*
-        コンストラクタ
-    */
-    public function __construct(User $user)
+    public function getUserEdit(Request $request)
     {
-        $this->user = $user;
+        $user = User::find($request->id);
+        
+        return view('admin.baseball.users', ['user' => $user]);
     }
     
-    /*
-        画面表示、データー取得用
-    */
-    public function getEdit($id)
+    public function postUserEdit(Request $request)
     {
-        $user = $this->user->selectUserFindByld($id);
-        return view('admin.baseball.users', compact('user'));
+        $user = User::find($request->id);
+        $user_form = $request->all();
+        $user->fill($user_form);
+        $user->save();
+        
+        return redirect('admin/baseball');
     }
 }

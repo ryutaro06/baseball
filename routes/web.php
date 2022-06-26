@@ -27,7 +27,8 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('baseball/index', 'Admin\CommentController@comment_add')->middleware('auth');
     Route::post('baseball/index', 'Admin\CommentController@comment_create')->middleware('auth');
 
-    Route::get('baseball/users/{id}', 'UserController@getEdit');
+    Route::get('baseball/users/{id}', 'Admin\UserController@getUserEdit');
+    Route::post('baseball/users/{id}', 'Admin\UserController@postUserEdit');
 });
 
 

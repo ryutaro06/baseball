@@ -46,10 +46,11 @@
                     </div>
                     <form action="{{ action('Admin\CommentController@comment_create') }}" method="post" enctype="multipart/form-data">
                         <div class="form-group row">
-                            <label class="col-md-1" for="comment"></label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control comment-text" name="comment" placeholder="コメントの投稿">
-                            </div>
+                            <label class="col-md-1" for="comment">
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control comment-text" name="comment" placeholder="コメントの投稿">
+                                </div>
+                            </label>
                             @csrf
                             <input type="hidden" name="topic_id" value="{{$topic->id}}">
                             <input type="submit" class="btn btn-primary col-md-1" value="送信">
