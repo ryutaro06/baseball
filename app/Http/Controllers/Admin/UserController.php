@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
@@ -19,14 +20,19 @@ class UserController extends Controller
     public function postUserEdit(Request $request)
     {
         
+        // Varidationを行う
+        $this->validate($request, User::$rules);
+        
+        
         $user = User::find($request->id);
-        $user_form = $request->all();
-        $user->fill($user_form);
+
+        $user->name = $request->name;
+        $user->favorite_team = $request->favorite_team;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        
         $user->save();
-        // echo $user;
-        // exit;
-      
-        // return view('admin.baseball.users', ['user' => $user]);  
+
         return redirect('admin/baseball');
     }
 }

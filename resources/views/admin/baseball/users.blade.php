@@ -9,6 +9,14 @@
                 <div class="card-header">ユーザ編集</div>
                 <div class="card-body">
                     <!-- 重要な箇所ここから -->
+                    @if(count($errors) > 0)
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+                    
                     <form method="post" action="{{ action('Admin\UserController@postUserEdit', [$user->id]) }}">
                         @csrf
                         <p>ID：{{ $user->id }}</p>
@@ -49,12 +57,33 @@
                         </div>
                         <div>
                             <p>メール：
-                                <input type="text" name="email" value="{{ $user->email }}" class="@error('email') is-invalid @enderror">
+                                <input type="email" name="email" value="{{ $user->email }}" class="@error('email') is-invalid @enderror">
                             </p>
                             @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
+                            @enderror
+                        </div>
+                        <div>
+                            <p>パスワードの入力は必須</p>
+                            <p>パスワード：
+                                <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" autocomplete="new-password">
+                            </p>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div>
+                            <p>パスワード（確認用）：
+                                <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password_confirmation" autocomplete="new-password">
+                            </p>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </div>
                         

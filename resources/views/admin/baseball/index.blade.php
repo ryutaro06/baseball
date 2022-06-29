@@ -48,8 +48,8 @@
                     </div>
                     <form action="{{ action('Admin\CommentController@comment_create') }}" method="post" enctype="multipart/form-data">
                         <div class="form-group row">
-                            <label class="col-md-1" for="comment">
-                                <div class="col-md-8">
+                            <label class="col-md-10" for="comment">
+                                <div class="col-md-12">
                                     <input type="text" class="form-control comment-text" name="comment" placeholder="コメントの投稿">
                                 </div>
                             </label>

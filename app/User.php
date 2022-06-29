@@ -15,7 +15,6 @@ class User extends Authenticatable
      *
      * @var array
      */
-
     protected $fillable = [
         'name', 'email', 'favorite_team', 'password',
     ];
@@ -37,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    
+    protected $guarded = array('id');
+    
+    public static $rules = array(
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255'],
+        'favorite_team' => ['required', 'string'],
+        'password' => ['string', 'min:8', 'confirmed'],
+        );
 }
