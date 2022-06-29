@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 // 以下を追記することでTopic Modelが扱えるようになる
 use App\Topic;
 use App\History;
+use App\User;
 
 use Carbon\Carbon;
 use Auth;
@@ -53,9 +54,18 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         $cond_title = $request->cond_title;
+        $user = User::find($request->id);
+        $topic = Topic::find($request->id);
+        
+        // dd($user, $request, $topic);
+        
         if ($cond_title != '') {
             // 検索されたら検索結果を取得する
             $posts = Topic::where('title', $cond_title)->get();
+        
+        } else if ($user->favorite_team == $topic->team) {
+            $posts = Topic::where('team', $use->favorite_team)->get();
+            
         } else {
             // それ以外はすべてのニュースを取得する
             $posts = Topic::all();
