@@ -54,22 +54,23 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         $cond_title = $request->cond_title;
-        $user = User::find($request->id);
-        $topic = Topic::find($request->id);
+        // $user = User::find($request->id);
+        $user = Auth::user();
+        // $topic = Topic::find($request->id);
         
-        // dd($user, $request, $topic);
+        // dd($user, $request->id);
+        
+        $posts = Topic::where('team', $user->favorite_team)->get();
+
         
         if ($cond_title != '') {
             // 検索されたら検索結果を取得する
             $posts = Topic::where('title', $cond_title)->get();
         
-        } else if ($user->favorite_team == $topic->team) {
-            $posts = Topic::where('team', $use->favorite_team)->get();
-            
-        } else {
-            // それ以外はすべてのニュースを取得する
+        } else if (count($posts) == 0) {
             $posts = Topic::all();
-        }
+            
+        } 
         
         return view('admin.baseball.index', ['posts' => $posts, 'cond_title' => $cond_title]);
     }
