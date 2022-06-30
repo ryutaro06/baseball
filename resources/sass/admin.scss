@@ -43,13 +43,18 @@ body {
 
 .main-content {
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.main-content .info {
+  width: 50%;
 }
 
 
-
 .img_size {
-  width: 90%;
-  margin: 0 auto;
+  width: 100%;
 }
 .card-body {
   width: 90%;
@@ -81,4 +86,5 @@ body {
 
 .grid {
   display: grid;
+  margin-top: 10px;
 }

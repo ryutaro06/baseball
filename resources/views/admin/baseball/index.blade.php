@@ -29,44 +29,42 @@
         
         
         @foreach($posts as $topic)
-            <div class="card main-content">
-                <img src="{{ secure_asset('/storage/image/'. $topic->image_path) }}" class="card-img-top img_size" alt="{{$topic->image_path}}">
-                <div class="card-body">
-                    <div class="card-article">
-                        <h3 class="card-title">{{ \Str::limit($topic->title, 100) }}</h3>
-                        <p class="card-text">{{ \Str::limit($topic->body, 500) }}</p>
-                    </div>
-                    <!--Commentの実装-->
-                    <div class="card-comment">
-                        @foreach($topic->comments as $comment)
-                            <div class="row">
-                                <p class="card-text col-8">{{ \Str::limit($comment->comment, 50) }}</p>
-                                <p class="card-text col-3">{{ $comment->edited_at }}</p>
-                                <p class="card-text col-1">{{ $comment->user_name }}</p>
-                            </div>
-                        @endforeach
-                    </div>
-                    <form action="{{ action('Admin\CommentController@comment_create') }}" method="post" enctype="multipart/form-data">
-                        <div class="form-group row">
-                            <label class="col-md-10" for="comment">
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control comment-text" name="comment" placeholder="コメントの投稿">
+            <div class="card main-content row">
+                <div class="info">
+                    <img src="{{ secure_asset('/storage/image/'. $topic->image_path) }}" class="card-img-top img_size" alt="{{$topic->image_path}}">
+                </div>
+                <div class="info">
+                    <div class="card-body">
+                        <div class="card-article">
+                            <h3 class="card-title">{{ \Str::limit($topic->title, 100) }}</h3>
+                            <p class="card-text">{{ \Str::limit($topic->body, 500) }}</p>
+                        </div>
+                        <!--Commentの実装-->
+                        <div class="card-comment">
+                            @foreach($topic->comments as $comment)
+                                <div class="row">
+                                    <p class="card-text col-12">{{ \Str::limit($comment->comment, 50) }}</p>
+                                    <p class="card-text col-3"></p>
+                                    <p class="card-text col-6">{{ $comment->edited_at }}</p>
+                                    <p class="card-text col-3">{{ $comment->user_name }}</p>
                                 </div>
-                            </label>
-                            @csrf
-                            <input type="hidden" name="topic_id" value="{{$topic->id}}">
-                            <input type="submit" class="btn btn-primary col-md-1" value="送信">
-                            <div class="col-md-1 grid">
-                                <a href="{{ action('Admin\NewsController@edit', ['id' => $topic->id]) }}">編集</a>
-                                <a href="{{ action('Admin\NewsController@delete', ['id' => $topic->id]) }}">削除</a>
+                            @endforeach
+                        </div>
+                        <form action="{{ action('Admin\CommentController@comment_create') }}" method="post" enctype="multipart/form-data">
+                            <div class="form-group row">
+                                <label class="col-md-10" for="comment">
+                                    <input type="text" class="form-control comment-text" name="comment" placeholder="コメントの投稿">
+                                </label>
+                                @csrf
+                                <input type="hidden" name="topic_id" value="{{$topic->id}}">
+                                <input type="submit" class="btn btn-primary col-md-2" value="送信">
+                                <div class="col-md-9"></div>
+                                <div class="col-md-3 grid">
+                                    <a href="{{ action('Admin\NewsController@edit', ['id' => $topic->id]) }}">記事の編集</a>
+                                    <a href="{{ action('Admin\NewsController@delete', ['id' => $topic->id]) }}">記事の削除</a>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-
-                    
-                    <div class="row">
-                        <div class="col-md-1">
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

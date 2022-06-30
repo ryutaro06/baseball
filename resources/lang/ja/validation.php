@@ -30,7 +30,7 @@ return [
         'array' => 'The :attribute must have between :min and :max items.',
     ],
     'boolean' => 'The :attribute field must be true or false.',
-    'confirmed' => 'The :attribute confirmation does not match.',
+    'confirmed' => ':attribute が異なります',
     'date' => 'The :attribute is not a valid date.',
     'date_equals' => 'The :attribute must be a date equal to :date.',
     'date_format' => 'The :attribute does not match the format :format.',
@@ -85,9 +85,9 @@ return [
     'mimes' => 'The :attribute must be a file of type: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
-        'numeric' => 'The :attribute must be at least :min.',
+        'numeric' => 'The :attributeを入力してください:min.',
         'file' => 'The :attribute must be at least :min kilobytes.',
-        'string' => 'The :attribute must be at least :min characters.',
+        'string' => ':attributeを :min 文字以上入力してください',
         'array' => 'The :attribute must have at least :min items.',
     ],
     'not_in' => 'The selected :attribute is invalid.',
@@ -111,7 +111,7 @@ return [
         'array' => 'The :attribute must contain :size items.',
     ],
     'starts_with' => 'The :attribute must start with one of the following: :values.',
-    'string' => 'The :attribute must be a string.',
+    'string' => ':attribute の入力が必要です',
     'timezone' => 'The :attribute must be a valid zone.',
     'unique' => 'The :attribute has already been taken.',
     'uploaded' => 'The :attribute failed to upload.',
@@ -150,6 +150,7 @@ return [
         'title' => 'タイトル',
         'body' => '記事',
         'image' => '画像',
+        'password' =>'パスワード',
         ],
 
 ];
