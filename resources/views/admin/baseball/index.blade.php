@@ -10,7 +10,7 @@
             <div class="col-md-4">
                 <a href="{{ action('Admin\NewsController@add') }}" role="button" class="btn btn-primary">新規作成</a>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 text-right">
                 <form action="{{ action('Admin\NewsController@index') }}" method="get">
                     <div class="form-group row">
                         <label class="col-md-2">タイトル</label>
@@ -18,12 +18,35 @@
                             <input type="text" class="form-control" name="cond_title" value="{{ $cond_title }}">
                         </div>
                         <div class="col-md-2">
-                            @csrf
                             <input type="submit" class="btn btn-primary" value="検索">
                         </div>
                     </div>
+                    @csrf
                 </form>
             </div>
+            <div class="col-md-8">
+            </div>
+            <div class="col-md-4 text-right">
+                <form action="{{ action('Admin\NewsController@index') }}" method="get">
+                    {{ Form::select('cond_team', [
+                        '' => '気になるチームを検索',
+                        'giants' => '巨人',
+                        'tigers' => '阪神',
+                        'carp' => '広島',
+                        'dragons' => '中日',
+                        'baystars' => 'DeNA',
+                        'swallows' => 'ヤクルト',
+                        'hawks' => 'ソフトバンク',
+                        'buffaloes' => 'オリックス',
+                        'fighters' => '日本ハム',
+                        'lions' => '西武',
+                        'marines' => 'ロッテ',
+                        'eagles' => '楽天',
+                    ])}}
+                    <input type="submit" class="btn btn-primary" value="検索">
+                </form>
+            </div>
+            
         </div>
         
         

@@ -54,25 +54,30 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         $cond_title = $request->cond_title;
-        // $user = User::find($request->id);
+        $cond_team = $request->cond_team;
         $user = Auth::user();
-        // $topic = Topic::find($request->id);
         
         // dd($user, $request->id);
         
         $posts = Topic::where('team', $user->favorite_team)->get();
 
+
         
         if ($cond_title != '') {
             // 検索されたら検索結果を取得する
             $posts = Topic::where('title', $cond_title)->get();
-        
+            
+        } else if($cond_team != '') {
+            // 検索されたら検索結果を取得する
+            $posts = Topic::where('team', $cond_team)->get();
+    
         } else if (count($posts) == 0) {
+            // dd($cond_team);
             $posts = Topic::all();
             
         } 
         
-        return view('admin.baseball.index', ['posts' => $posts, 'cond_title' => $cond_title]);
+        return view('admin.baseball.index', ['posts' => $posts, 'cond_title' => $cond_title, 'cond_team' => $cond_team]);
     }
     public function edit(Request $request)
     {
